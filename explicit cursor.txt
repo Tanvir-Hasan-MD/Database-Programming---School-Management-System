@@ -1,0 +1,22 @@
+Declare 
+r_student_id result.student_id%TYPE;
+r_class_id  result.class_id%TYPE;
+r_exam_date result.exam_date%TYPE;
+r_mark result.mark%TYPE;
+
+
+	CURSOR result_cursor IS
+	select student_id,class_id,exam_date,mark
+	from result;
+BEGIN
+	OPEN result_cursor;
+	LOOP 
+	FETCH result_cursor into r_student_id,r_class_id,r_exam_date,r_mark;
+	EXIT WHEN result_cursor%ROWCOUNT >5 OR	
+				result_cursor%NOTFOUND;
+	DBMS_OUTPUT.PUT_LINE
+	(to_char(r_student_id)||'          '||r_class_id||'          '||r_exam_date||'          '||r_mark);
+	END LOOP;
+CLOSE result_cursor;
+END;
+/

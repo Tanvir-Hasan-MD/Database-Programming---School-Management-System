@@ -1,0 +1,46 @@
+CREATE OR REPLACE FUNCTION grading   
+(stud_id in number,c_id in varchar2)
+return varchar2
+is
+m_mark number;
+grade varchar2(2);
+
+
+BEGIN
+select mark into m_mark 
+from result
+where stud_id=result.student_id
+AND c_id=result.class_id;
+
+if m_mark>0 AND m_mark<49 then grade:='F';
+elsif m_mark>=50 AND m_mark<=59 then grade:='C';
+elsif m_mark>=60 AND m_mark<=69 then grade:='B';
+elsif m_mark>=70 AND m_mark<=79 then grade:='A-';
+elsif m_mark>=80 AND m_mark<=100 then grade:='A';
+end if;
+
+return(grade);
+end;                                    
+/
+
+--ANONYMOUS BLOCK 
+--===========================
+
+ACCEPT stud_id prompt 'Enter Student ID:'
+
+ACCEPT c_id prompt 'Enter c_id ID:'
+
+declare
+stud_id number;
+c_id varchar2(20);
+
+
+BEGIN
+stud_id:=&stud_id;
+c_id:=&c_id;
+
+
+DBMS_OUTPUT.put_line
+('The grade is '||grading(stud_id,c_id));
+END;
+/

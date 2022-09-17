@@ -1,0 +1,19 @@
+create or replace procedure call2  IS
+cursor lolali is select * from family;
+r_lolali lolali%ROWTYPE;
+  
+        BEGIN
+	open lolali;
+	loop
+        fetch lolali into r_lolali; 
+ 	exit when lolali%ROWCOUNT>2;
+ 
+      dbms_output.put_line('Father Name: '||r_lolali.father_name);
+      dbms_output.put_line('Mother Name: '||r_lolali.mother_name);
+      dbms_output.put_line('Phone No: '||r_lolali.father_phone);
+      dbms_output.put_line('Address: '||r_lolali.home_address);
+      dbms_output.put_line('------------------------------');
+      end loop;
+      close lolali;
+      end;
+      /

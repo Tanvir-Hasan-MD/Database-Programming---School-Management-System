@@ -1,0 +1,28 @@
+create or replace procedure newval
+(s_staff_id staff.staff_id%TYPE,
+s_first_name staff.first_name%TYPE,
+s_last_name staff.last_name%TYPE,
+s_staff_phone staff.phone_number%TYPE,
+s_address staff.address%TYPE,
+s_salary staff.salary%TYPE
+) IS
+BEGIN
+INSERT INTO staff (staff.staff_id,staff.first_name,staff.last_name,staff.phone_number,staff.address,staff.salary) 
+VALUES (s_staff_id,s_first_name,s_last_name,s_staff_phone,s_address,s_salary);
+DBMS_OUTPUT.PUT_LINE('Data successfully added');
+END;
+/
+
+--ANONYMOUS BLOCK 
+--===========================
+ACCEPT s_staff_id prompt 'ENTER Staff ID: '
+ACCEPT s_first_name prompt 'ENTER  FIRST NAME: '
+ACCEPT s_last_name prompt 'ENTER LAST NAME: '
+ACCEPT s_staff_phone prompt 'ENTER PHONE NO: '
+ACCEPT s_address prompt 'ENTER ADDRESS: '
+ACCEPT s_salary prompt 'ENTER SALARY: '
+
+BEGIN
+newval('&s_staff_id','&s_first_name','&s_last_name','&s_staff_phone','&s_address','&s_salary');
+END;
+/

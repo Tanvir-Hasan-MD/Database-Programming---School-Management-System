@@ -1,0 +1,34 @@
+CREATE OR REPLACE FUNCTION tota_stud   
+(cls_id in varchar2)
+return number
+is
+s_id number;
+
+
+BEGIN
+select count(student_id) into s_id 
+from result
+where cls_id=result.class_id;
+
+
+return(s_id);
+end;                                    
+/
+
+--ANONYMOUS BLOCK 
+--===========================
+
+ACCEPT cls_id prompt 'Enter Class ID:'
+
+declare
+cls_id varchar2(20);
+
+
+BEGIN
+cls_id:=&cls_id;
+
+
+DBMS_OUTPUT.put_line
+('Total students in this course are '||tota_stud(cls_id));
+END;
+/
